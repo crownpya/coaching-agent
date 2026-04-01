@@ -1,0 +1,39 @@
+Guía completa de 8 sesiones de coaching ejecutivo para managers y mandos
+intermedios en el sector tecnológico, desarrollando cada sesión con
+objetivos, ejercicios prácticos y resultados esperados.
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Sesión   Tema                                               Objetivo                                                                                 Ejercicios prácticos                                                                  Resultado esperado
+  -------- -------------------------------------------------- ---------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------
+  1        Autoconocimiento y estilo de liderazgo             Identificar fortalezas, áreas de mejora y estilo de liderazgo propio                     • Test de liderazgo situacional\                                                      Consciencia del estilo de liderazgo y alineación con valores personales
+                                                                                                                                                       • Reflexión guiada sobre situaciones recientes\                                       
+                                                                                                                                                       • Mapa de valores personales y profesionales                                          
+
+  2        Comunicación efectiva y asertiva                   Mejorar la claridad, asertividad y capacidad de influencia en distintos interlocutores   • Role-play de reuniones frente a equipo técnico y dirección\                         Mayor claridad en mensajes y capacidad de influencia sin autoridad formal
+                                                                                                                                                       • Checklist de comunicación para claridad y escucha activa\                           
+                                                                                                                                                       • Feedback espejo                                                                     
+
+  3        Gestión de conflictos y conversaciones difíciles   Manejar conflictos internos y conversaciones críticas de manera constructiva             • Identificación y clasificación de conflictos recientes\                             Herramientas prácticas para resolver conflictos y mantener relaciones profesionales saludables
+                                                                                                                                                       • Simulación de conversación difícil (feedback o negociación)\                        
+                                                                                                                                                       • Plan de acción para abordar un conflicto real                                       
+
+  4        Motivación, desempeño y compromiso                 Incrementar motivación individual y del equipo, estableciendo métricas claras            • Mapa de motivadores del equipo\                                                     Mayor compromiso del equipo y claridad sobre objetivos y expectativas
+                                                                                                                                                       • Revisión de objetivos SMART\                                                        
+                                                                                                                                                       • Plan de seguimiento de motivación y desempeño                                       
+
+  5        Delegación y construcción de equipos               Mejorar la gestión de equipos y delegación efectiva                                      • Matriz de delegación según autonomía y supervisión\                                 Equipos empoderados y líderes capaces de delegar eficientemente
+                                                                                                                                                       • Ejercicio de confianza: delegar tarea real con seguimiento mínimo\                  
+                                                                                                                                                       • Dinámica de roles: analizar responsabilidades y detectar gaps                       
+
+  6        Toma de decisiones y priorización                  Mejorar capacidad de tomar decisiones estratégicas y priorizar tareas con impacto        • Matriz de priorización de proyectos/tareas\                                         Decisiones más conscientes y alineadas con estrategia, con justificación clara de prioridades
+                                                                                                                                                       • Análisis de decisiones recientes\                                                   
+                                                                                                                                                       • Simulación de decisiones complejas entre objetivos técnicos y de negocio            
+
+  7        Gestión del cambio y resiliencia                   Manejar incertidumbre y liderar procesos de cambio con estabilidad                       • Mapa de resistencia al cambio\                                                      Capacidad de guiar al equipo en cambios y mantener desempeño frente a incertidumbre
+                                                                                                                                                       • Plan de comunicación de cambios a stakeholders\                                     
+                                                                                                                                                       • Ejercicio de resiliencia: planificación de afrontamiento de situaciones de estrés   
+
+  8        Desarrollo de talento y visión estratégica         Consolidar visión estratégica y planificar desarrollo de talento interno                 • Mapa de talento: identificar líderes potenciales y áreas críticas\                  Liderazgo estratégico consolidado, con plan de sucesión y desarrollo de talento en marcha
+                                                                                                                                                       • Plan de desarrollo individual de un miembro del equipo\                             
+                                                                                                                                                       • Ejercicio de visión a 12 meses alineada con estrategia                              
+  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

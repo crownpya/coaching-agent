@@ -1,0 +1,19 @@
+# Secretos — NUNCA subir
+.env
+
+# Base de datos
+data/database/*.db
+
+# Certificados generados
+data/certificates/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml

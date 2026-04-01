@@ -1,0 +1,16 @@
+# Coaching Agent — dependencias
+
+# Core
+anthropic>=0.87.0
+python-dotenv>=1.0.0
+
+# Base de datos (stdlib, no requiere instalación)
+# sqlite3
+
+# UI
+streamlit>=1.35.0
+plotly>=5.22.0
+pandas>=2.2.0
+
+# PDF
+reportlab>=4.0.0

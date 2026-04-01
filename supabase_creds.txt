@@ -1,0 +1,3 @@
+SUPABASE_URL = https://scwchtkdsqankisabwkc.supabase.co
+SUPABASE_ANON_KEY = scwchtkdsqankisabwkceyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjd2NodGtkc3Fhbmtpc2Fid2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwMzY3MTYsImV4cCI6MjA5MDYxMjcxNn0.oBBP-ZWiXjrbrhlWpGboCWC-iYIThop4PYT3Np9erKo
+DATABASE_URL = DATABASE_URL=postgresql://postgres.scwchtkdsqankisabwkc:sIMOn2008PYA*@aws-0-eu-west-1.pooler.supabase.com:5432/postgres

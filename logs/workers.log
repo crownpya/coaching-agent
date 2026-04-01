@@ -1,0 +1,93 @@
+=== Ejecutando workers de coaching === 
+01/04/2026 12:02:30,63 - Iniciando workers 
+[Session Tracker] 
+2026-04-01 12:02:31 [INFO] session_tracker — === Generando reporte diario completo ===
+2026-04-01 12:02:31 [INFO] session_tracker — Analizando engagement para program_id=prog-001
+2026-04-01 12:02:31 [WARNING] session_tracker — Alerta temprana de engagement — program_id=prog-001 score=20.0
+2026-04-01 12:02:31 [INFO] session_tracker — Generando sugerencias de intervención para program_id=prog-001
+2026-04-01 12:02:31 [INFO] session_tracker — === Reporte diario completado — 1 programas | 1 en riesgo | promedio 20.0 ===
+{
+  "fecha": "2026-04-01",
+  "coachees_en_riesgo": [
+    {
+      "program_id": "prog-001",
+      "coachee_nombre": "Carlos M\u00e9ndez",
+      "coachee_email": "carlos@techcorp.com",
+      "engagement_score": 20.0,
+      "abandono_detectado": true,
+      "dias_sin_actividad": 35,
+      "intervenciones": [
+        {
+          "tipo": "1:1_extra",
+          "razon": "Engagement score bajo (20.0), por debajo del umbral 40.",
+          "prioridad": "Alta",
+          "descripcion": "Sesi\u00f3n adicional de 30-45 min con el coach antes de la siguiente sesi\u00f3n programada."
+        },
+        {
+          "tipo": "nudge_intensive",
+          "razon": "Tasa de acciones completadas baja (0%) con score 20.0.",
+          "prioridad": "Media",
+          "descripcion": "Aumentar la frecuencia de nudges de 1 a 3 por semana durante 2 semanas."
+        },
+        {
+          "tipo": "profile_review",
+          "razon": "Sin ninguna acci\u00f3n completada pese a tener sesiones realizadas.",
+          "prioridad": "Media",
+          "descripcion": "Revisi\u00f3n del perfil del coachee: competencias, objetivo original y ajuste del plan de coaching."
+        }
+      ]
+    }
+  ],
+  "engagement_por_coachee": [
+    {
+      "program_id": "prog-001",
+      "coachee_nombre": "Carlos M\u00e9ndez",
+      "engagement_score": 20.0
+    }
+  ],
+  "acciones_recomendadas_coach": [
+    {
+      "coachee_nombre": "Carlos M\u00e9ndez",
+      "tipo_intervencion": "1:1_extra",
+      "prioridad": "Alta",
+      "razon": "Engagement score bajo (20.0), por debajo del umbral 40."
+    },
+    {
+      "coachee_nombre": "Carlos M\u00e9ndez",
+      "tipo_intervencion": "nudge_intensive",
+      "prioridad": "Media",
+      "razon": "Tasa de acciones completadas baja (0%) con score 20.0."
+    },
+    {
+      "coachee_nombre": "Carlos M\u00e9ndez",
+      "tipo_intervencion": "profile_review",
+      "prioridad": "Media",
+      "razon": "Sin ninguna acci\u00f3n completada pese a tener sesiones realizadas."
+    }
+  ],
+  "resumen": {
+    "total_programas": 1,
+    "en_riesgo": 1,
+    "engagement_promedio": 20.0
+  },
+  "timestamp": "2026-04-01T12:02:31"
+}
+[Progress Analyzer] 
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from docs.scripts.progress_analyzer import generar_reporte_completo; import json; print(json.dumps(generar_reporte_completo(), indent=2))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ImportError: cannot import name 'generar_reporte_completo' from 'docs.scripts.progress_analyzer' (C:\Users\TSSC\Desktop\Coaching\coaching-agent\docs\scripts\progress_analyzer.py)
+[Nudge Scheduler] 
+2026-04-01 12:02:32 [INFO] nudge_scheduler — Banco GROW cargado: 0 preguntas
+2026-04-01 12:02:32 [INFO] nudge_scheduler — Programas activos: 1
+2026-04-01 12:02:32 [INFO] nudge_scheduler — program_id=prog-001 score=20.0 freq=3/week hora=10h
+2026-04-01 12:02:32 [INFO] nudge_scheduler — Nudges inteligentes programados: 3
+2026-04-01 12:02:32 [INFO] nudge_scheduler — === Procesando nudges pendientes ===
+2026-04-01 12:02:32 [INFO] nudge_scheduler — Pendientes: 1
+2026-04-01 12:02:32 [INFO] nudge_scheduler —   [SIMULADO] \u2192 program_id=prog-001 | fecha=2026-04-01 10:00:00 | 'Un tech lead en modo bajo es normal. ¿Qué necesitas —espacio…'
+2026-04-01 12:02:32 [INFO] nudge_scheduler — Enviados: 1 | Fallidos: 0
+Programando nudges...
+Enviando nudges pendientes...
+01/04/2026 12:02:32,51 - Workers completados 
+--- 

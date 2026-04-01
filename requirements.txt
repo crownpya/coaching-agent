@@ -14,3 +14,19 @@ pandas>=2.2.0
 
 # PDF
 reportlab>=4.0.0
+streamlit
+pandas
+plotly
+anthropic
+python-dotenv
+psycopg2-binary
+supabase
+schedule
+streamlit
+pandas
+plotly
+anthropic
+python-dotenv
+psycopg2-binary
+supabase
+schedule

@@ -348,5 +348,47 @@ def main():
         if not coachees:
             st.info("No hay coachees registrados. Añade uno desde Supabase.")
 
+# ============================================
+# ENDPOINTS PARA WORKERS (cron-job.org)
+# ============================================
+
+import hashlib
+import sys
+from io import StringIO
+
+# Clave secreta (cámbiala por algo único)
+SECRET_KEY = os.getenv("WORKER_SECRET_KEY", "worker_secreto_123456")
+
+def run_worker_endpoint(worker_name):
+    """Ejecuta un worker y devuelve resultado"""
+    old_stdout = sys.stdout
+    sys.stdout = StringIO()
+    
+    try:
+        if worker_name == "session_tracker":
+            from docs.scripts.session_tracker import generar_reporte_diario
+            resultado = generar_reporte_diario()
+            mensaje = f"Session Tracker ejecutado. Coachees en riesgo: {len(resultado.get('coachees_en_riesgo', []))}"
+        elif worker_name == "progress_analyzer":
+            from docs.scripts.progress_analyzer import generar_reporte_completo
+            resultado = generar_reporte_completo()
+            mensaje = "Progress Analyzer ejecutado"
+        elif worker_name == "nudge_scheduler":
+            from docs.scripts.nudge_scheduler import schedule_intelligent_nudges, send_pending_nudges
+            schedule_intelligent_nudges()
+            send_pending_nudges()
+            mensaje = "Nudge Scheduler ejecutado"
+        else:
+            mensaje = f"Worker no encontrado: {worker_name}"
+        
+        output = sys.stdout.getvalue()
+        return {"success": True, "worker": worker_name, "message": mensaje, "output": output[:500]}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+    finally:
+        sys.stdout = old_stdout
+
+# Nota: Para que esto funcione en Streamlit, necesitamos usar la API de Flask
+# Pero como Streamlit no soporta rutas, usaremos query parameters en la URL
 if __name__ == "__main__":
     main()

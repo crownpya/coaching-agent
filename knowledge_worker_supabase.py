@@ -13,7 +13,6 @@ supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 def run():
     print(f"📚 Knowledge Worker iniciado a las {datetime.now()}")
     try:
-        # Actualizar fecha de los items activos
         res = supabase.table("coach_knowledge").update({"last_updated": datetime.now().isoformat()}).eq("active", True).execute()
         print(f"✅ Actualizados {len(res.data)} registros activos")
     except Exception as e:

@@ -2,29 +2,66 @@ name: Workers Programados
 
 on:
   schedule:
-    - cron: '0 8 * * *'   # Progress Worker: diario 8:00 UTC
-    - cron: '0 8 * * 0'   # Knowledge Worker: domingos 8:00 UTC
+    - cron: '0 8 * * *'
+    - cron: '0 8 * * 0'
   workflow_dispatch:
 
 jobs:
   progress_worker:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 8 * * *' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Instalar dependencias
-        run: pip install supabase requests
-      - name: Mostrar estructura de directorios
+      - run: pip install supabase requests
+      - name: Ejecutar Progress Worker
         run: |
-          pwd
-          ls -la
-          echo "=== Buscando archivos .py ==="
-          find . -name "*.py" | head -20
-      - name: Ejecutar progress worker
-        run: python progress_worker_supabase.py
+          python -c "
+import os
+import requests
+from datetime import datetime, timedelta
+from supabase import create_client
+
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY')
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError('Faltan SUPABASE_URL o SUPABASE_SERVICE_KEY')
+
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def send_telegram(msg):
+    token = os.getenv('TELEGRAM_BOT_TOKEN')
+    chat = os.getenv('TELEGRAM_CHAT_ID')
+    if token and chat:
+        try:
+            requests.post(f'https://api.telegram.org/bot{token}/sendMessage', json={'chat_id': chat, 'text': msg}, timeout=5)
+            print('📨 Nudge enviado')
+        except Exception as e:
+            print(f'❌ Error Telegram: {e}')
+    else:
+        print(f'📢 {msg}')
+
+print('🔍 Progress Worker iniciado')
+progs = supabase.table('coaching_programs').select('id, coachee_id').eq('estado', 'activo').execute()
+for prog in progs.data:
+    prog_id = prog['id']
+    ses = supabase.table('sessions').select('id', count='exact').eq('program_id', prog_id).not_.is_('fecha_realizada', 'null').execute()
+    sessions_done = ses.count or 0
+    progress = round((sessions_done / 8) * 100, 1)
+    last = supabase.table('sessions').select('fecha_realizada').eq('program_id', prog_id).not_.is_('fecha_realizada', 'null').order('fecha_realizada', desc=True).limit(1).execute()
+    if last.data:
+        last_date = datetime.fromisoformat(last.data[0]['fecha_realizada'].replace(' ', 'T'))
+        days = (datetime.now() - last_date).days
+        if days > 7:
+            send_telegram(f'⚠️ Inactivo {days} días. Progreso: {progress}% - {prog_id[:8]}')
+    elif progress < 30:
+        send_telegram(f'📉 Progreso bajo ({progress}%) para {prog_id[:8]}')
+    else:
+        print(f'✅ {prog_id[:8]}... progreso {progress}%')
+print('🏁 Progress Worker finalizado')
+"
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
@@ -33,21 +70,35 @@ jobs:
 
   knowledge_worker:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 8 * * 0' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Instalar dependencias
-        run: pip install supabase
-      - name: Mostrar estructura de directorios
+      - run: pip install supabase
+      - name: Ejecutar Knowledge Worker
         run: |
-          pwd
-          ls -la
-          find . -name "*.py" | head -20
-      - name: Ejecutar knowledge worker
-        run: python knowledge_worker_supabase.py
+          python -c "
+import os
+from datetime import datetime
+from supabase import create_client
+
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_SERVICE_KEY')
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError('Faltan SUPABASE_URL o SUPABASE_SERVICE_KEY')
+
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+print('📚 Knowledge Worker iniciado')
+try:
+    res = supabase.table('coach_knowledge').update({'last_updated': datetime.now().isoformat()}).eq('active', True).execute()
+    print(f'✅ Actualizados {len(res.data)} registros activos')
+except Exception as e:
+    print(f'❌ Error: {e}')
+print('🏁 Knowledge Worker finalizado')
+"
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}

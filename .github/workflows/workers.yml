@@ -2,37 +2,24 @@ name: Workers Programados
 
 on:
   schedule:
-    - cron: '0 8 * * *'   # Progress Worker: diario a las 8:00 UTC
-    - cron: '0 8 * * 0'   # Knowledge Worker: domingos 8:00 UTC
+    - cron: '0 8 * * *'
+    - cron: '0 8 * * 0'
   workflow_dispatch:
 
 jobs:
   progress_worker:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 8 * * *' || github.event_name == 'workflow_dispatch'
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-      - run: pip install supabase python-dotenv requests
-      - run: python progress_worker_supabase.py
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-
-  knowledge_worker:
-    runs-on: ubuntu-latest
-    if: github.event.schedule == '0 8 * * 0' || github.event_name == 'workflow_dispatch'
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-      - run: pip install supabase python-dotenv
-      - run: python knowledge_worker_supabase.py
+      - uses: actions/checkout@v4
+      - name: Mostrar estructura de directorios
+        run: |
+          pwd
+          ls -la
+          ls -la ./
+      - name: Instalar dependencias
+        run: pip install supabase requests
+      - name: Ejecutar worker
+        run: python progress_worker_supabase.py
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
